@@ -1,0 +1,60 @@
+.container {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr) 0.7fr;
+    grid-template-rows: 0.6fr repeat(3, 1fr) 0.3fr;
+    grid-column-gap: 0px;
+    grid-row-gap: 0px;
+    height: 100vh;
+    margin: 0;
+}
+
+header {
+    grid-area: 1 / 1 / 2 / 4;
+    display: grid;
+}
+
+nav {
+    display: inline-grid;
+    grid-area: 1 / 1 / 1 / 1;
+    grid-template-columns: repeat(6, 1fr);
+    grid-template-rows: 1fr;
+
+    #Entradas {
+        grid-column: 1 / 2;
+    }
+
+    #PlatoFuerte {
+        grid-column: 2 / 3;
+    }
+
+    #Postre {
+        grid-column: 3 / 4;
+    }
+
+    #Bebidas {
+        grid-column: 4 / 5;
+    }
+
+    #BotonInicio {
+        grid-column: 5 / 6;
+    }
+}
+
+footer {
+    grid-area: 5 / 1 / 6 / 4;
+}
+
+#Introduccion {
+    grid-area: 2 / 1 / 5 / 4;
+}
+
+#MenuMain{
+    grid-area: 2 / 1 / 5 / 3;
+}
+
+#menuCarrito{
+    grid-area: 2 / 3 / 5 / 4;
+}
+
+
+
