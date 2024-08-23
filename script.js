@@ -10,7 +10,7 @@ document.addEventListener('DOMContentLoaded', function () {
         if (item.classList.contains(categoria)) {
           item.style.display = 'grid';
         } else {
-          item.style.display = 'grid';
+          item.style.display = 'none';
         }
       });
     }
@@ -26,19 +26,19 @@ document.addEventListener('DOMContentLoaded', function () {
   
     document.getElementById('PlatoFuerte').addEventListener('click', () => {
       mostrarCategoria('PlatoFuerte');
-      actualizarTitulo('PlatoFuerte');
+      actualizarTitulo('Platos Fuertes');
 
     });
   
     document.getElementById('Postre').addEventListener('click', () => {
       mostrarCategoria('Postre');
-      actualizarTitulo('Postre');
+      actualizarTitulo('Postres');
 
     });
   
     document.getElementById('Bebidas').addEventListener('click', () => {
       mostrarCategoria('Bebida');
-      actualizarTitulo('Bebida');
+      actualizarTitulo('Bebidas');
     });
   
     document.getElementById('Todo').addEventListener('click', () => {
