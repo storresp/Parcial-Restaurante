@@ -18,12 +18,14 @@
 header {
     grid-area: 1 / 1 / 2 / 3;
     display: grid;
+    grid-template-columns: repeat(7, 1fr);
+    grid-template-rows: 1fr;
     background-color: var(--color-main-2);
 }
 
 nav {
     display: grid;
-    grid-area: 1 / 1 / 1 / 1;
+    grid-area: 1 / 2 / 1 / 8;
     grid-template-columns: repeat(6, 1fr);
     grid-template-rows: 1fr;
 
@@ -61,6 +63,15 @@ footer {
     grid-area: 2 / 1 / 5 / 3;
 }
 
+main {
+    #titleMenu {
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        grid-area: header;
+    }
+}
+
 #MenuMain{
     grid-area: 2 / 1 / 5 / 2;
     margin: 1.5rem;
@@ -79,6 +90,9 @@ footer {
     margin: 2rem;
     padding: 0;
     place-content: center;
+    -ms-overflow-style: none;  
+    scrollbar-width: none;
+      
 
     li {
         border-radius: 2rem;
@@ -100,5 +114,9 @@ footer {
     border-radius: 1rem;
     background-color: var(--color-main);
     font-size: 0.8rem;
+}
+
+#MenuMain::-webkit-scrollbar {
+    display: none;
 }
 
