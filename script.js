@@ -1,5 +1,4 @@
 document.addEventListener('DOMContentLoaded', function () {
-    const menuMain = document.getElementById('MenuMain');
     const menuItems = document.querySelectorAll('#Menu li');
   
     const comprasList = document.getElementById('Compras');
@@ -51,7 +50,7 @@ document.addEventListener('DOMContentLoaded', function () {
     function agregarAlCarrito(nombre, precio) {
       const item = document.createElement('li');
       item.textContent = `${nombre} - ${precio}`;
-      comprasList.appendChild(item);
+      comprasList.insertBefore(item, comprasList.firstChild);
   
       actualizarResumen();
     }
@@ -95,6 +94,7 @@ document.addEventListener('DOMContentLoaded', function () {
               <p>Items: 0</p>
               <p>Total: $0 COP</p>
             `;
+            
         } else {
             alert('El carrito está vacío.');
         }
@@ -111,4 +111,4 @@ document.addEventListener('DOMContentLoaded', function () {
         });
       }
     });
-})
+});

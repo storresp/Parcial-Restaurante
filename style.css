@@ -1,8 +1,28 @@
 :root{
-    --color-accent-1: rgb(65, 88, 166);
+    --color-accent-1: rgb(19, 35, 85);
     --color-accent-2: rgb(23, 155, 174);
     --color-main: rgb(241, 222, 198);
     --color-main-2: rgb(255, 131, 67);
+    color: var(--color-accent-1);
+    font-family: Cambria, Cochin, Georgia, Times, 'Times New Roman', serif;
+}
+
+a {
+    text-decoration: none;
+    color: #FFFFFF;
+}
+
+#Introduccion {
+    background-image: url(image.png);
+    display: grid;
+
+    div {
+        background-color: var(--color-main);
+        margin: 2rem;
+        place-self: center;
+        padding: 2rem;
+        border-radius: 2rem;
+    }
 }
 
 .container {
@@ -21,6 +41,12 @@ header {
     grid-template-columns: repeat(7, 1fr);
     grid-template-rows: 1fr;
     background-color: var(--color-main-2);
+    
+}
+
+img {
+    width: 4rem;
+    height: 5rem;
 }
 
 nav {
@@ -28,6 +54,11 @@ nav {
     grid-area: 1 / 1 / 2 /8;
     grid-template-columns: repeat(7, 1fr);
     grid-template-rows: 1fr;
+
+    #Logo{
+        grid-column: 1 / 2;
+        place-self: center;
+    }
 
     #Entradas {
         grid-column: 2 / 3;
@@ -54,8 +85,9 @@ nav {
     }
 
     button {
-        margin: 2rem;
+        place-self: center;
         border-radius: 1rem;
+        margin: 0;
     }
 }
 
@@ -65,22 +97,66 @@ footer {
 
 #Introduccion {
     grid-area: 2 / 1 / 5 / 3;
+    place-self: stretch;
+    div {
+        h1 {
+            text-align: center;
+        }
+
+        img {
+            margin-left: 8.5rem;
+        }
+    }
 }
 
 #menuCarrito {
-    display: flex;
-    flex-wrap: wrap;
+    display: grid;
     overflow: auto;
-    padding-left: 2rem;
+    grid-template-columns: auto;
+    grid-template-rows: 1fr 0.3fr;
+    grid-area: 2 / 2 / 5 / 3;
+    margin: 1.5rem;
+    border-radius: 1rem;
+    background-color: var(--color-main);
+    font-size: 0.8rem;
+}
+
+#Carrito {
+    display: grid;
+    grid-area: 1 / 1 / 2 / 2;
+    overflow: auto;
+    -ms-overflow-style: none;  
+    scrollbar-width: none;
+}
+
+#Datitos {
+    display: grid;
+    grid-area: 2 / 1 / 3 / 2;
+    grid-template-columns: 2fr;
+    grid-template-rows: 2fr;
+    padding: 0.3rem;
+
+    #Resumen {
+        grid-area: 2 / 1 / 3 / 3;
+    }
+
+    #Pago {
+        grid-area: 1 / 1 / 2 / 2;
+    }
+
+    #Vaciar {
+        grid-area: 1 / 2 / 2 / 3;
+    }
 }
 
 #Compras {
+    grid-area: 1 / 1 / 2 / 2;
     place-self: center;
     place-items: center;
+    list-style-type: none;
+
     li {
-        margin: 1rem;
-        place-self: center;
-        place-items: center;
+        padding: 1rem;
         background-color: var(--color-main-2);
     }
 }
@@ -95,7 +171,7 @@ main {
 
 #MenuMain{
     grid-area: 2 / 1 / 5 / 2;
-    margin: 1.5rem;
+    margin: 1rem;
     border-radius: 1rem;
     background-color: var(--color-main);
     overflow: auto;
@@ -123,21 +199,90 @@ main {
         place-self: center;
         place-items: center;
         background-color: var(--color-main-2);
-        padding: 0.5rem;
+        padding: 1.5rem;
         width: 40%;
         height: 15rem;
     }
-}
-
-#menuCarrito{
-    grid-area: 2 / 2 / 5 / 3;
-    margin: 1.5rem;
-    border-radius: 1rem;
-    background-color: var(--color-main);
-    font-size: 0.8rem;
 }
 
 #MenuMain::-webkit-scrollbar {
     display: none;
 }
 
+#MenuCarrito::-webkit-scrollbar {
+    display: none;
+}
+
+@media only screen and (max-width: 840px) {
+    .container {
+        display: flex;
+        flex-wrap: wrap;  
+    }
+}
+
+button{
+    padding:0.3em 1.2em;
+    margin:0 0.2em 0.2em 0;
+    border-radius:2em;
+    box-sizing: border-box;
+    text-decoration:none;
+    font-family: Cambria, Cochin, Georgia, Times, 'Times New Roman', serif;
+    font-weight:300;
+    color:#FFFFFF;
+    background-color:var(--color-accent-2);
+    text-align:center;
+    transition: all 0.2s;
+    border: 0;
+}
+
+button:hover{
+    background-color: var(--color-accent-1);
+}
+
+@media all and (max-width:30em){
+    button{
+    display:block;
+    margin:0.2em auto;
+    }
+}
+
+footer {
+    display: grid;
+    grid-template-columns: 1fr 1fr 1fr;
+    grid-template-rows: 1fr;
+    padding: 1rem;
+
+    div {
+        place-self: center;
+        background-color: var(--color-main);
+        border-radius: 2rem;
+        padding: 1rem;
+        align-self: center;
+
+        img {
+            width: 3rem;
+            height: 3rem;
+        }
+    }
+}
+
+#IndexHeader {
+    grid-area: 1 / 1 / 2 / 3;
+    display: grid;
+    grid-template-columns: 1fr;
+    grid-template-rows: 1fr;
+    place-items: center;
+
+    #IndexNav{
+        display: grid;
+        display: grid;
+        grid-template-columns: 1fr;
+        grid-template-rows: 1fr;
+        place-items: center;
+
+        button {
+            padding: 2rem;
+            margin: 0.2rem;
+        }
+    }
+}
