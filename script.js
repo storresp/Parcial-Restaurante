@@ -16,7 +16,7 @@ document.addEventListener('DOMContentLoaded', function () {
     botonPostre.addEventListener('click', () => actualizarMenu('Postres'));
     botonBebidas.addEventListener('click', () => actualizarMenu('Bebidas'));
     botonInicio.addEventListener('click', () => {
-        menuElement.innerHTML = '<p>chavales es un easterEgg xd</p>';
+        menuElement.innerHTML = '<p>esto es el inicio</p>';
     });
 
     const botonVaciar = document.getElementById('Vaciar');
