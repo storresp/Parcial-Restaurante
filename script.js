@@ -1,57 +1,61 @@
 document.addEventListener('DOMContentLoaded', function () {
-    // Selecciona el main y el ul de Menu
     const menuMain = document.getElementById('MenuMain');
     const menuItems = document.querySelectorAll('#Menu li');
   
-    // Selecciona el ul del carrito y el resumen
     const comprasList = document.getElementById('Compras');
     const resumen = document.getElementById('Resumen');
   
-    // Función para mostrar elementos de una categoría
     function mostrarCategoria(categoria) {
       menuItems.forEach(item => {
         if (item.classList.contains(categoria)) {
           item.style.display = 'grid';
         } else {
-          item.style.display = 'none';
+          item.style.display = 'grid';
         }
       });
     }
+    function actualizarTitulo(titulo) {
+        document.getElementById('titleMenu').textContent = titulo;
+    }
   
-    // Asocia cada botón de categoría con su evento de click
     document.getElementById('Entradas').addEventListener('click', () => {
       mostrarCategoria('Entrada');
+      actualizarTitulo('Entradas');
+
     });
   
     document.getElementById('PlatoFuerte').addEventListener('click', () => {
       mostrarCategoria('PlatoFuerte');
+      actualizarTitulo('PlatoFuerte');
+
     });
   
     document.getElementById('Postre').addEventListener('click', () => {
       mostrarCategoria('Postre');
+      actualizarTitulo('Postre');
+
     });
   
     document.getElementById('Bebidas').addEventListener('click', () => {
       mostrarCategoria('Bebida');
+      actualizarTitulo('Bebida');
     });
   
-    document.getElementById('BotonInicio').addEventListener('click', () => {
+    document.getElementById('Todo').addEventListener('click', () => {
+        actualizarTitulo('Menú Completo');
       menuItems.forEach(item => {
         item.style.display = 'grid';
       });
     });
   
-    // Función para agregar un elemento al carrito
     function agregarAlCarrito(nombre, precio) {
       const item = document.createElement('li');
       item.textContent = `${nombre} - ${precio}`;
       comprasList.appendChild(item);
   
-      // Actualizar el resumen
       actualizarResumen();
     }
   
-    // Función para actualizar el resumen
     function actualizarResumen() {
       const totalItems = comprasList.children.length;
       let totalPrice = 0;
@@ -65,8 +69,37 @@ document.addEventListener('DOMContentLoaded', function () {
         <p>Total: $${totalPrice.toLocaleString()} COP</p>
       `;
     }
-  
-    // Asocia cada botón "Agregar al carrito" con su respectivo evento de click
+
+    const botonVaciar = document.getElementById('Vaciar');
+    botonVaciar.addEventListener('click', () => {
+        comprasList.innerHTML = '';
+        
+        resumen.innerHTML = `
+          <p>Items: 0</p>
+          <p>Total: $0 COP</p>
+        `;
+    });
+
+    const botonPago = document.getElementById('Pago');
+    botonPago.addEventListener('click', () => {
+        const totalItems = comprasList.children.length;
+        if (totalItems > 0) {
+            let totalPrice = 0;
+            comprasList.querySelectorAll('li').forEach(item => {
+                const price = parseInt(item.textContent.split('-')[1].trim().replace('$', '').replace(',', ''));
+                totalPrice += price;
+            });
+            alert(`Procesando pago de $${totalPrice.toLocaleString()} COP por ${totalItems} artículos.`);
+            comprasList.innerHTML = '';
+            resumen.innerHTML = `
+              <p>Items: 0</p>
+              <p>Total: $0 COP</p>
+            `;
+        } else {
+            alert('El carrito está vacío.');
+        }
+    });
+
     menuItems.forEach(item => {
       const addButton = item.querySelector('button');
       if (addButton) {
@@ -74,8 +107,9 @@ document.addEventListener('DOMContentLoaded', function () {
           const nombre = item.querySelector('h3').textContent;
           const precio = item.querySelector('.price').textContent;
           agregarAlCarrito(nombre, precio);
+
         });
       }
     });
-  });
+})
   
