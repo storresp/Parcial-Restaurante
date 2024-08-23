@@ -11,7 +11,7 @@ document.addEventListener('DOMContentLoaded', function () {
     function mostrarCategoria(categoria) {
       menuItems.forEach(item => {
         if (item.classList.contains(categoria)) {
-          item.style.display = 'block';
+          item.style.display = 'grid';
         } else {
           item.style.display = 'none';
         }
@@ -37,7 +37,7 @@ document.addEventListener('DOMContentLoaded', function () {
   
     document.getElementById('BotonInicio').addEventListener('click', () => {
       menuItems.forEach(item => {
-        item.style.display = 'block';
+        item.style.display = 'grid';
       });
     });
   

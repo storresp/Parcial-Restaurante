@@ -25,28 +25,32 @@ header {
 
 nav {
     display: grid;
-    grid-area: 1 / 2 / 1 / 8;
-    grid-template-columns: repeat(6, 1fr);
+    grid-area: 1 / 1 / 2 /8;
+    grid-template-columns: repeat(7, 1fr);
     grid-template-rows: 1fr;
 
     #Entradas {
-        grid-column: 1 / 2;
-    }
-
-    #PlatoFuerte {
         grid-column: 2 / 3;
     }
 
-    #Postre {
+    #PlatoFuerte {
         grid-column: 3 / 4;
     }
 
-    #Bebidas {
+    #Postre {
         grid-column: 4 / 5;
     }
 
-    #BotonInicio {
+    #Bebidas {
+        grid-column: 5 / 6;
+    }
+
+    #Todo {
         grid-column: 6 / 7;
+    }
+
+    #BotonInicio {
+        grid-column: 7 / 8;
     }
 
     button {
@@ -63,12 +67,29 @@ footer {
     grid-area: 2 / 1 / 5 / 3;
 }
 
+#menuCarrito {
+    display: flex;
+    flex-wrap: wrap;
+    overflow: auto;
+    padding-left: 2rem;
+}
+
+#Compras {
+    place-self: center;
+    place-items: center;
+    li {
+        margin: 1rem;
+        place-self: center;
+        place-items: center;
+        background-color: var(--color-main-2);
+    }
+}
+
 main {
     #titleMenu {
         display: flex;
         align-items: center;
         justify-content: center;
-        grid-area: header;
     }
 }
 
