@@ -466,13 +466,22 @@ background-color: var(--color-main-2);
     #MenuMain{
         grid-area: 2 / 1 / 4 / 2;
         height: auto;
+
+        #Menu {
+            li {
+                width: 70%;
+                height: 80%;
+            }
+        }
     }
 
     #menuCarrito{
         grid-area: 4 / 1 / 6 / 2;
-        height: 0.3fr;
         grid-template-columns: auto;
-        grid-template-rows: 2fr 0.2fr;
+        padding-top: 0.5rem;
+        padding-bottom: 0.5rem;
+        grid-template-rows: 40% 20%;
+
     }
 
     header, #PagosHeader {
@@ -486,13 +495,6 @@ background-color: var(--color-main-2);
         min-height: 100vh;
         grid-template-columns: 1fr;
         grid-template-rows: repeat(6 1fr);
-    }
-
-    #Menu {
-        li {
-            width: 60%;
-            height: 80%;
-        }
     }
 
     #PagosNav {
