@@ -4,6 +4,7 @@ document.addEventListener('DOMContentLoaded', function () {
   const resumen = document.getElementById('Resumen');
   const botoninicio = document.getElementById('BotonInicio');
   const BotonAlMenu = document.getElementById('BotonAlMenu');
+  const BotonIntegrantes = document.getElementById("BotonIntegrantes");
 
   function mostrarCategoria(categoria) {
     menuItems.forEach(item => {
@@ -18,6 +19,12 @@ document.addEventListener('DOMContentLoaded', function () {
   function actualizarTitulo(titulo) {
       document.getElementById('titleMenu').textContent = titulo;
   }
+
+  if (BotonIntegrantes) {
+    BotonIntegrantes.addEventListener('click', () => {
+        window.location.href = 'integrantes.html';
+    });
+  };
 
   if (BotonAlMenu) {
     BotonAlMenu.addEventListener('click', () => {
@@ -108,7 +115,7 @@ document.addEventListener('DOMContentLoaded', function () {
       `;
   });
 
-  const botonPago = document.getElementById('Pago');
+  const botonPago = document.getElementById('PayRedir');
   botonPago.addEventListener('click', () => {
       const totalItems = comprasList.children.length;
       if (totalItems > 0) {
