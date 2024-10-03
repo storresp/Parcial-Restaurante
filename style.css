@@ -1,47 +1,62 @@
 :root{
-    --color-accent-1: rgb(19, 35, 85);
-    --color-accent-2: rgb(23, 155, 174);
-    --color-main: rgb(241, 222, 198);
-    --color-main-2: rgb(255, 131, 67);
+    --color-accent-1: rgb(70, 65, 63);
+    --color-accent-2: rgb(120, 75, 70); 
+    --color-main: rgb(200, 190, 180); 
+    --color-main-2: rgb(160, 140, 125); 
+    --color-maroon-1: rgb(130, 50, 48); 
+    --color-maroon-2: rgb(180, 90, 85); 
     color: var(--color-accent-1);
     font-family: Cambria, Cochin, Georgia, Times, 'Times New Roman', serif;
 }
 
 a {
     text-decoration: none;
-    color: #FFFFFF;
+    color: rgb(230, 230, 230); /* Light Off-White */
 }
 
-#Introduccion {
-    background-image: url(image.png);
-    display: grid;
+button {
+    padding: 0.3em 1.2em;
+    margin: 0 0.2em 0.2em 0;
+    border-radius: 2em;
+    box-sizing: border-box;
+    text-decoration: none;
+    font-family: Cambria, Cochin, Georgia, Times, 'Times New Roman', serif;
+    font-weight: 300;
+    color: #FFFFFF;
+    background-color: var(--color-maroon-1);
+    text-align: center;
+    transition: all 0.2s;
+    border: 0;
+}
 
-    div {
-        background-color: var(--color-main);
-        margin: 2rem;
-        place-self: center;
-        padding: 2rem;
-        border-radius: 2rem;
+button:hover {
+    background-color: var(--color-accent-1);
+}
+
+@media all and (max-width:30em){
+    button{
+    display:block;
+    margin:0.2em auto;
     }
 }
+
 
 .container {
     display: grid;
     grid-template-columns: 1fr 0.4fr;
-    grid-template-rows: 0.6fr repeat(3, 1fr) 0.3fr;
+    grid-template-rows: 0.5fr repeat(3, 1fr);
     margin: 0;
     height: 100vh;
-    width: auto;
+    width: 100vw;
     background-color: var(--color-accent-2);
 }
 
 header {
     grid-area: 1 / 1 / 2 / 3;
     display: grid;
-    grid-template-columns: repeat(7, 1fr);
+    grid-template-columns: 1fr;
     grid-template-rows: 1fr;
     background-color: var(--color-main-2);
-    
 }
 
 img {
@@ -51,43 +66,52 @@ img {
 
 nav {
     display: grid;
-    grid-area: 1 / 1 / 2 /8;
+    grid-area: 1 / 1 / 2 /2;
     grid-template-columns: repeat(7, 1fr);
+    column-gap: 0.7rem;
     grid-template-rows: 1fr;
-
+    overflow: hidden;
+    padding: 1rem;
+    
     #Logo{
         grid-column: 1 / 2;
         place-self: center;
     }
 
-    #Entradas {
-        grid-column: 2 / 3;
-    }
-
-    #PlatoFuerte {
-        grid-column: 3 / 4;
-    }
-
-    #Postre {
-        grid-column: 4 / 5;
-    }
-
-    #Bebidas {
-        grid-column: 5 / 6;
-    }
-
+    #Entradas,
+    #PlatoFuerte,
+    #Postre,
+    #Bebidas,
     #Todo {
-        grid-column: 6 / 7;
+        background-color: var(--color-maroon-2);
+        border-radius: 0.5rem;
     }
 
-    #BotonInicio {
-        grid-column: 7 / 8;
+    #Entradas:hover,
+    #PlatoFuerte:hover,
+    #Postre:hover,
+    #Bebidas:hover,
+    #Todo:hover {
+        background-color: var(--color-maroon-1);
+
+        
     }
+
+    #Entradas { grid-column: 2 / 3; }
+    #PlatoFuerte { grid-column: 3 / 4; }
+    #Postre { grid-column: 4 / 5; }
+    #Bebidas { grid-column: 5 / 6; }
+    #Todo { grid-column: 6 / 7; }
+    #BotonInicio { grid-column: 7 / 8; }
 
     button {
         place-self: center;
         border-radius: 1rem;
         margin: 0;
+        height: 2.4rem;
+        width: 5.5rem;
+        background-color: var(--color-maroon-1);
+        color: #FFFFFF;
     }
 }
 
@@ -101,6 +125,7 @@ footer {
     div {
         h1 {
             text-align: center;
+            color: var(--color-maroon-1); 
         }
 
         img {
@@ -127,6 +152,7 @@ footer {
     overflow: auto;
     -ms-overflow-style: none;  
     scrollbar-width: none;
+    position: inherit;
 }
 
 #Datitos {
@@ -135,6 +161,7 @@ footer {
     grid-template-columns: 2fr;
     grid-template-rows: 2fr;
     padding: 0.3rem;
+    position: relative;
 
     #Resumen {
         grid-area: 2 / 1 / 3 / 3;
@@ -142,10 +169,20 @@ footer {
 
     #Pago {
         grid-area: 1 / 1 / 2 / 2;
+        width: 90%;
+        height: 80%;
+        background-color: var(--color-maroon-2);
     }
 
     #Vaciar {
         grid-area: 1 / 2 / 2 / 3;
+        width: 100%;
+        height: 80%;
+        background-color: var(--color-maroon-2);
+    }
+
+    #Pago:hover, #Vaciar:hover {
+        background-color: var(--color-maroon-1);
     }
 }
 
@@ -156,8 +193,24 @@ footer {
     list-style-type: none;
 
     li {
+        display: grid;
+        grid-template-columns: 0.1fr 1fr;
         padding: 1rem;
         background-color: var(--color-main-2);
+        border-left: 4px solid var(--color-maroon-1); 
+        border-radius: 2rem;
+        margin: 0.5rem;
+        column-gap: 0.4rem;
+
+        span {
+            grid-area: 1 / 2 / 2 / 3;
+            align-self: center;
+        }
+
+        button {
+            grid-area: 1 / 1 / 2 / 2;
+            place-self: center;
+        }
     }
 }
 
@@ -166,6 +219,7 @@ main {
         display: flex;
         align-items: center;
         justify-content: center;
+        color: var(--color-maroon-1); /* Deep Maroon */
     }
 }
 
@@ -189,7 +243,7 @@ main {
     place-content: center;
     -ms-overflow-style: none;  
     scrollbar-width: none;
-      
+  
 
     li {
         border-radius: 2rem;
@@ -202,6 +256,7 @@ main {
         padding: 1.5rem;
         width: 40%;
         height: 15rem;
+        border: 1.5px solid var(--color-maroon-1);
     }
 }
 
@@ -213,36 +268,123 @@ main {
     display: none;
 }
 
-@media only screen and (max-width: 840px) {
+@media only screen and (max-width: 760px) {
     .container {
-        display: flex;
-        flex-wrap: wrap;  
+        display: grid; 
+        grid-template-columns: 1fr;
+        grid-template-rows: 0.6fr repeat(3, 1fr) 0.6fr;
     }
-}
 
-button{
-    padding:0.3em 1.2em;
-    margin:0 0.2em 0.2em 0;
-    border-radius:2em;
-    box-sizing: border-box;
-    text-decoration:none;
-    font-family: Cambria, Cochin, Georgia, Times, 'Times New Roman', serif;
-    font-weight:300;
-    color:#FFFFFF;
-    background-color:var(--color-accent-2);
-    text-align:center;
-    transition: all 0.2s;
-    border: 0;
-}
+    nav {
+        display: flex;
+        grid-area: 1 / 1 / 2 / 2;
+        column-gap: 0.7rem;
+        flex-wrap: wrap;
+        align-items: center;
+        justify-content: center;
+        
+        #Logo{
+            display: none;
+        }
+    
+        button {
+            place-self: center;
+            border-radius: 1rem;
+            margin: 0;
+            height: 2.4rem;
+            background-color: var(--color-maroon-1); /* Deep Maroon */
+        }
+    }
 
-button:hover{
-    background-color: var(--color-accent-1);
-}
+    #MenuMain{
+        grid-area: 2 / 1 / 4 / 2;
+        height: auto;
+    }
 
-@media all and (max-width:30em){
-    button{
-    display:block;
-    margin:0.2em auto;
+    #menuCarrito{
+        grid-area: 4 / 1 / 6 / 2;
+        height: 0.3fr;
+        grid-template-columns: auto;
+        grid-template-rows: 2fr 0.2fr;
+    }
+
+    header {
+        grid-area: 1 / 1 / 2 / 2;
+        height: 0.6fr;
+    }
+
+    #IndexHeader {
+        grid-area: 1 / 1 / 2 / 2;
+        display: grid;
+        grid-template-columns: 1fr;
+        grid-template-rows: 1fr;
+        place-items: center;
+    
+        #IndexNav{
+            display: grid;
+            grid-template-columns: 1fr;
+            grid-template-rows: 1fr;
+            place-items: center;
+    
+            button {
+                background-color: var(--color-maroon-1); /* Deep Maroon */
+            }
+        }
+    }
+    
+    .IndexContainer {
+        margin: 0;
+        display: grid;
+        min-height: 100vh;
+        grid-template-columns: 1fr;
+        grid-template-rows: repeat(6 1fr);
+    }
+    
+    #Introduccion {
+        display: grid;
+        grid-area: 2 / 2 / 3 / 3;
+    
+        div {
+            background-color: var(--color-main);
+            margin: 2rem;
+            place-self: center;
+            padding: 2rem;
+            border-radius: 2rem;
+        }
+    }
+    
+    #IndexFooter {
+        display: grid;
+        grid-area: 3 / 1 / 6 / 2;
+        grid-template-rows: 1fr 1fr 1fr;
+        grid-template-columns: none;
+        row-gap: 1rem  ;
+    
+        div {
+            grid-area: auto;
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            
+            .xd {
+                display: grid;
+                grid-template-rows: 1fr 1fr;
+                grid-template-columns:none;
+    
+                #Nombre {
+                    grid-area: auto;
+                }
+    
+                #Desc {
+                    grid-area: auto;
+                }
+            }
+    
+            img {
+                grid-area: auto;
+                place-self: center;
+            }
+        }
+    
     }
 }
 
@@ -267,7 +409,7 @@ footer {
 }
 
 #IndexHeader {
-    grid-area: 1 / 1 / 2 / 3;
+    grid-area: 1 / 1 / 2 / 4;
     display: grid;
     grid-template-columns: 1fr;
     grid-template-rows: 1fr;
@@ -275,14 +417,57 @@ footer {
 
     #IndexNav{
         display: grid;
-        display: grid;
         grid-template-columns: 1fr;
         grid-template-rows: 1fr;
         place-items: center;
+    }
+}
 
-        button {
-            padding: 2rem;
-            margin: 0.2rem;
+.IndexContainer {
+    margin: 0;
+    display: grid;
+    min-height: 100vh;
+    grid-template-columns: 1fr 1fr 1fr;
+    grid-template-rows: repeat(6 1fr);
+}
+
+#Introduccion {
+    display: grid;
+    grid-area: 2 / 1 / 5 / 4;
+    grid-template-columns: 1fr 1fr 1fr;
+    place-content: center;
+
+    div {
+        grid-area: 1 / 2 / 2 / 3;
+        background-color: var(--color-main);
+        margin: 2rem;
+        padding: 2rem;
+        border-radius: 2rem;
+    }
+}
+
+#IndexFooter {
+display: grid;
+grid-area: 5 / 1 / 6 / 4;
+
+    .xd {
+        display: grid;
+        grid-template-rows: 1fr 0.5fr;
+        grid-template-columns: 1fr ;
+        place-items: center;
+        width: 10rem;
+        height: 8rem;
+
+        img {
+            grid-area: 1 / 1 / 2 / 2;
+            place-self: center;
+            width:50%;
+            height: 80%;
+        }
+
+
+        #Nombre {
+            grid-area: 2 / 1 / 3 / 2;
         }
     }
 }
