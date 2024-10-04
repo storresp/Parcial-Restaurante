@@ -68,7 +68,7 @@ document.addEventListener('DOMContentLoaded', function () {
       const li = document.createElement('li');
       
       const info = document.createElement('span');
-      info.textContent = `${item.nombre} - $${item.precio}`;
+      info.textContent = `${item.nombre} - $${item.precio.toLocaleString('es-CO')}`;
       
       const removeButton = document.createElement('button');
       removeButton.textContent = 'X';
@@ -83,10 +83,14 @@ document.addEventListener('DOMContentLoaded', function () {
     });
 
     const totalItems = cart.length;
-    const totalPrice = cart.reduce((total, item) => total + parseFloat(item.precio), 0);
+    const totalPrice = cart.reduce((total, item) => total + item.precio, 0);
+    
+    // Formatear el total con separadores de miles
+    const totalPriceFormateado = totalPrice.toLocaleString('es-CO');
+
     resumen.innerHTML = `
       <p>Items: ${totalItems}</p>
-      <p>Total: $${totalPrice.toLocaleString()} COP</p>
+      <p>Total: $${totalPriceFormateado} COP</p>
     `;
   }
 
@@ -102,15 +106,19 @@ document.addEventListener('DOMContentLoaded', function () {
 
     cart.forEach(item => {
       const li = document.createElement('li');
-      li.textContent = `${item.nombre} - $${item.precio}`;
+      li.textContent = `${item.nombre} - $${item.precio.toLocaleString('es-CO')}`;
       itemsList.appendChild(li);
     });
 
     const totalItems = cart.length;
-    const totalPrice = cart.reduce((total, item) => total + parseFloat(item.precio), 0);
+    const totalPrice = cart.reduce((total, item) => total + item.precio, 0);
+    
+    // Formatear el total con separadores de miles
+    const totalPriceFormateado = totalPrice.toLocaleString('es-CO');
+
     resumenPago.innerHTML = `
       <p>Items: ${totalItems}</p>
-      <p>Total: $${totalPrice.toLocaleString()} COP</p>
+      <p>Total: $${totalPriceFormateado} COP</p>
     `;
   }
 
@@ -147,19 +155,26 @@ document.addEventListener('DOMContentLoaded', function () {
 
     async function fetchData() {
       try {
-        const response = await fetch('https://script.googleusercontent.com/macros/echo?user_content_key=CKq-LQas5w4nUMnpY_-r0GUin-7rSoKPB7iBV_wXtrfbwojXs0-qOHR424skSoTiFA7eJEA2ER6ss48Xg6YhQibXYYv7Fu_4m5_BxDlH2jW0nuo2oDemN9CCS2h10ox_1xSncGQajx_ryfhECjZEnA6wXRRzyrfTIKmLYEVRoswXqyofKrLrma4N-JjG6IUfb06gUu96E11OfZziasEjNI-G1zoKx9HpX2tur1IPZjIGRoGQdMN6zNz9Jw9Md8uu&lib=MqXoQJ202MbeZzBd6_irkBTKZ9dnBgvUF');
-        
-        if (!response.ok) {
-          throw new Error(`HTTP error! status: ${response.status}`);
+        const response = await fetch('https://script.googleusercontent.com/macros/echo?user_content_key=CKq-LQas5w4nUMnpY_-r0GUin-7rSoKPB7iBV_wXtrfbwojXs0-qOHR424skSoTiFA7eJEA2ER6ss48Xg6YhQibXYYv7Fu_4m5_BxDlH2jW0nuo2oDemN9CCS2h10ox_1xSncGQajx_ryfhECjZEnA6wXRRzyrfTIKmLYEVRoswXqyofKrLrma4N-JjG6IUfb06gUu96E11OfZziasEjNI-G1zoKx9HpX2tur1IPZjIGRoGQdMN6zNz9Jw9Md8uu&lib=MqXoQJ202MbeZzBd6_irkBTKZ9dnBgvUF',
+            {
+              method: 'GET',
+              headers: {
+                'Content-Type': 'application/json'
+              }
+            }
+          );
+          
+          if (!response.ok) {
+            throw new Error(`HTTP error! status: ${response.status}`);
+          }
+
+          const data = await response.json();
+          renderMenu(data);
+
+        } catch (error) {
+          console.error('Error al realizar la solicitud:', error);
         }
-
-        const data = await response.json();
-        renderMenu(data);
-
-      } catch (error) {
-        console.error('Error al realizar la solicitud:', error);
       }
-    }
 
     function renderMenu(menuData) {
       const menuList = document.getElementById('Menu');
@@ -191,8 +206,18 @@ document.addEventListener('DOMContentLoaded', function () {
         boton.addEventListener('click', function() {
           const item = this.closest('li');
           const nombre = item.querySelector('h3').textContent;
-          const precio = item.querySelector('p:nth-child(4)').textContent.split('$')[1];
-          agregarAlCarrito(nombre, parseFloat(precio));
+          const precioTexto = item.querySelector('p:nth-child(4)').textContent;
+          
+          // Extraer el precio y eliminar comas
+          let precio = '0';
+          if (precioTexto.includes('$')) {
+            precio = precioTexto.split('$')[1].replace(/,/g, ''); // Eliminar todas las comas
+          }
+          
+          // Convertir a número
+          const precioNumero = parseFloat(precio);
+          
+          agregarAlCarrito(nombre, precioNumero);
         });
       });
     }
@@ -257,10 +282,11 @@ document.addEventListener('DOMContentLoaded', function () {
         pedido: cart
       };
 
-      fetch('http://127.0.0.1:8000/api/pagar', { 
+      fetch('https://script.googleusercontent.com/macros/echo?user_content_key=CKq-LQas5w4nUMnpY_-r0GUin-7rSoKPB7iBV_wXtrfbwojXs0-qOHR424skSoTiFA7eJEA2ER6ss48Xg6YhQibXYYv7Fu_4m5_BxDlH2jW0nuo2oDemN9CCS2h10ox_1xSncGQajx_ryfhECjZEnA6wXRRzyrfTIKmLYEVRoswXqyofKrLrma4N-JjG6IUfb06gUu96E11OfZziasEjNI-G1zoKx9HpX2tur1IPZjIGRoGQdMN6zNz9Jw9Md8uu&lib=MqXoQJ202MbeZzBd6_irkBTKZ9dnBgvUF', { 
         method: 'POST',
         headers: {
-          'Content-Type': 'application/json'
+          'Content-Type': 'application/json',
+          'Access-Control-Origin' : "*"
         },
         body: JSON.stringify(datosPago)
       })
@@ -271,15 +297,20 @@ document.addEventListener('DOMContentLoaded', function () {
         return response.json();
       })
       .then(data => {
-        alert('Pago confirmado. ¡Gracias por tu compra!');
-        vaciarCarrito();
-        window.location.href = 'index.html'; 
+        if (data.status === 'success') {
+          alert('Pago confirmado. ¡Gracias por tu compra!');
+          vaciarCarrito();
+          window.location.href = 'index.html'; 
+        } else {
+          throw new Error('Error al procesar el pedido.');
+        }
       })
       .catch(error => {
         console.error('Error al procesar el pago:', error);
         alert('Hubo un error al procesar tu pago. Por favor, inténtalo de nuevo.');
       });
     });
-
   }
 });
+
+
