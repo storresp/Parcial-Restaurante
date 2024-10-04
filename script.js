@@ -173,7 +173,7 @@ document.addEventListener('DOMContentLoaded', function () {
 
         platos.innerHTML = `
           <h3>${item.Nombre}</h3>
-          <img src="${item.Imagen}" alt="${item.Nombre}">
+          <img src="${item.Imagen}" ">
           <p>${item.Descripcion}</p>
           <p>Precio: $${item.Precio}</p>
           <p id="Tipo">Tipo de plato: ${item.Tipo}</p>
