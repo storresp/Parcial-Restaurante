@@ -1,5 +1,4 @@
 document.addEventListener('DOMContentLoaded', function () {
-    const menuMain = document.getElementById('MenuMain');
     const menuItems = document.querySelectorAll('#Menu li');
   
     const comprasList = document.getElementById('Compras');
@@ -10,7 +9,7 @@ document.addEventListener('DOMContentLoaded', function () {
         if (item.classList.contains(categoria)) {
           item.style.display = 'grid';
         } else {
-          item.style.display = 'grid';
+          item.style.display = 'none';
         }
       });
     }
