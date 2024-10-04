@@ -67,7 +67,7 @@ document.addEventListener('DOMContentLoaded', function () {
 
   async function fetchData() {
     try {
-      const response = await fetch('https://cors-anywhere.script.googleusercontent.com/macros/echo?user_content_key=CKq-LQas5w4nUMnpY_-r0GUin-7rSoKPB7iBV_wXtrfbwojXs0-qOHR424skSoTiFA7eJEA2ER6ss48Xg6YhQibXYYv7Fu_4m5_BxDlH2jW0nuo2oDemN9CCS2h10ox_1xSncGQajx_ryfhECjZEnA6wXRRzyrfTIKmLYEVRoswXqyofKrLrma4N-JjG6IUfb06gUu96E11OfZziasEjNI-G1zoKx9HpX2tur1IPZjIGRoGQdMN6zNz9Jw9Md8uu&lib=MqXoQJ202MbeZzBd6_irkBTKZ9dnBgvUF');
+      const response = await fetch('https://script.googleusercontent.com/macros/echo?user_content_key=CKq-LQas5w4nUMnpY_-r0GUin-7rSoKPB7iBV_wXtrfbwojXs0-qOHR424skSoTiFA7eJEA2ER6ss48Xg6YhQibXYYv7Fu_4m5_BxDlH2jW0nuo2oDemN9CCS2h10ox_1xSncGQajx_ryfhECjZEnA6wXRRzyrfTIKmLYEVRoswXqyofKrLrma4N-JjG6IUfb06gUu96E11OfZziasEjNI-G1zoKx9HpX2tur1IPZjIGRoGQdMN6zNz9Jw9Md8uu&lib=MqXoQJ202MbeZzBd6_irkBTKZ9dnBgvUF');
       
       if (!response.ok) {
         throw new Error(`HTTP error! status: ${response.status}`);
