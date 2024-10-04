@@ -1,13 +1,7 @@
 document.addEventListener('DOMContentLoaded', function () {
-  const comprasList = document.getElementById('Compras');
-  const resumen = document.getElementById('Resumen');
-  const botoninicio = document.getElementById('BotonInicio');
+  const botonInicio = document.getElementById('BotonInicio');
   const BotonAlMenu = document.getElementById('BotonAlMenu');
   const BotonIntegrantes = document.getElementById("BotonIntegrantes");
-  const BotonPagar = document.getElementById("PayRedir");
-  const Menu = document.getElementById('Menu');
-  const Titulo = document.getElementById('titleMenu');
-
   const botonesCategoria = {
     'Entrada': document.getElementById('Entradas'),
     'Rolls': document.getElementById('PlatoFuerte'),
@@ -15,7 +9,7 @@ document.addEventListener('DOMContentLoaded', function () {
     'Bebida': document.getElementById('Bebidas'),
     'Todo': document.getElementById('Todo')
   };
-
+  
   if (BotonIntegrantes) {
     BotonIntegrantes.addEventListener('click', () => {
       window.location.href = 'integrantes.html';
@@ -28,169 +22,264 @@ document.addEventListener('DOMContentLoaded', function () {
     });
   };
 
-  if (botoninicio) {
-    botoninicio.addEventListener('click', () => {
+  if (botonInicio) {
+    botonInicio.addEventListener('click', () => {
       window.location.href = 'index.html';
     });
   };
 
-  if (BotonPagar) {
-    BotonPagar.addEventListener('click', () => {
-      window.location.href = 'pago.html';
-    });
-  };
-
-  function mostrarCategoria(categoria) {
-    const itemsArray = Menu.querySelectorAll('li');
-    itemsArray.forEach(item => {
-      const tipoPlato = item.querySelector('p#Tipo').textContent.split(': ')[1];
-      if (categoria === 'Todo' || tipoPlato === categoria) {
-        item.style.display = 'grid';
-
-        if (categoria === 'Entrada') {
-          Titulo.innerHTML = "Entradas"
-        }else if (categoria === 'Rolls') {
-          Titulo.innerHTML = "Rolls"
-        }else if (categoria === 'Postre') {
-          Titulo.innerHTML = "Postres"
-        }else if (categoria === 'Bebida') {
-          Titulo.innerHTML = "Bebidas"
-        }else if (categoria === 'Todo') {
-          Titulo.innerHTML = "Menú Completo"
-        }
-
-      } else {
-        item.style.display = 'none';
-      }
-    });
+  function getCart() {
+    const cart = localStorage.getItem('carrito');
+    return cart ? JSON.parse(cart) : [];
   }
 
-  async function fetchData() {
-    try {
-      const response = await fetch('https://script.googleusercontent.com/macros/echo?user_content_key=CKq-LQas5w4nUMnpY_-r0GUin-7rSoKPB7iBV_wXtrfbwojXs0-qOHR424skSoTiFA7eJEA2ER6ss48Xg6YhQibXYYv7Fu_4m5_BxDlH2jW0nuo2oDemN9CCS2h10ox_1xSncGQajx_ryfhECjZEnA6wXRRzyrfTIKmLYEVRoswXqyofKrLrma4N-JjG6IUfb06gUu96E11OfZziasEjNI-G1zoKx9HpX2tur1IPZjIGRoGQdMN6zNz9Jw9Md8uu&lib=MqXoQJ202MbeZzBd6_irkBTKZ9dnBgvUF');
-      
-      if (!response.ok) {
-        throw new Error(`HTTP error! status: ${response.status}`);
-      }
-
-      const data = await response.json();
-      renderMenu(data);
-
-    } catch (error) {
-      console.error('Error al realizar la solicitud:', error);
-    }
-  }
-
-  function renderMenu(menuData) {
-    const menuList = document.getElementById('Menu');
-    menuList.innerHTML = ''; 
-
-    const itemsArray = menuData.data;
-
-    itemsArray.forEach(item => {
-      const platos = document.createElement('li');
-      platos.classList.add('menu-item');
-
-      platos.innerHTML = `
-        <h3>${item.Nombre}</h3>
-        <img src="${item.Imagen}" alt="${item.Nombre}">
-        <p>${item.Descripcion}</p>
-        <p>Precio: $${item.Precio}</p>
-        <p id="Tipo">Tipo de plato: ${item.Tipo}</p>
-        <button class="agregarCarrito">Agregar al carrito</button>
-      `;
-      menuList.appendChild(platos);
-    });
-
-    asignarEventosCarrito();
-  }
-
-  function asignarEventosCarrito() {
-    const botonesAgregar = document.querySelectorAll('.agregarCarrito');
-    botonesAgregar.forEach(boton => {
-      boton.addEventListener('click', function() {
-        const item = this.closest('li');
-        const nombre = item.querySelector('h3').textContent;
-        const precio = item.querySelector('p:nth-child(4)').textContent.split('$')[1];
-        agregarAlCarrito(nombre, precio);
-      });
-    });
+  function saveCart(cart) {
+    localStorage.setItem('carrito', JSON.stringify(cart));
   }
 
   function agregarAlCarrito(nombre, precio) {
-    const item = document.createElement('li');
-
-    const info = document.createElement('span');
-    info.textContent = `${nombre} - $${precio}`;
-
-    const removeButton = document.createElement('button');
-    removeButton.textContent = 'X';
-    removeButton.classList.add('remove-item');
-
-    removeButton.addEventListener('click', () => {
-      comprasList.removeChild(item);
-      actualizarResumen();
-    });
-
-    item.appendChild(info);
-    item.appendChild(removeButton);
-
-    comprasList.insertBefore(item, comprasList.firstChild);
-    actualizarResumen();
+    const cart = getCart();
+    cart.push({ nombre, precio });
+    saveCart(cart);
+    renderCarrito();
   }
 
-  function actualizarResumen() {
-    const totalItems = comprasList.children.length;
-    let totalPrice = 0;
-    comprasList.querySelectorAll('li').forEach(item => {
-      const priceText = item.querySelector('span').textContent.split('- $')[1].trim();
-      const price = parseInt(priceText.replace(',', ''));
-      totalPrice += price;
+  function removerDelCarrito(index) {
+    const cart = getCart();
+    cart.splice(index, 1);
+    saveCart(cart);
+    renderCarrito();
+  }
+
+  function vaciarCarrito() {
+    localStorage.removeItem('carrito');
+    renderCarrito();
+  }
+
+  function renderCarrito() {
+    const comprasList = document.getElementById('Compras');
+    const resumen = document.getElementById('Resumen');
+    if (!comprasList || !resumen) return; // Solo en menu.html
+
+    const cart = getCart();
+    comprasList.innerHTML = '';
+
+    cart.forEach((item, index) => {
+      const li = document.createElement('li');
+      
+      const info = document.createElement('span');
+      info.textContent = `${item.nombre} - $${item.precio}`;
+      
+      const removeButton = document.createElement('button');
+      removeButton.textContent = 'X';
+      removeButton.classList.add('remove-item');
+      removeButton.addEventListener('click', () => {
+        removerDelCarrito(index);
+      });
+      
+      li.appendChild(info);
+      li.appendChild(removeButton);
+      comprasList.appendChild(li);
     });
 
+    const totalItems = cart.length;
+    const totalPrice = cart.reduce((total, item) => total + parseFloat(item.precio), 0);
     resumen.innerHTML = `
       <p>Items: ${totalItems}</p>
       <p>Total: $${totalPrice.toLocaleString()} COP</p>
     `;
   }
 
-  const botonVaciar = document.getElementById('Vaciar');
-  botonVaciar.addEventListener('click', () => {
-    comprasList.innerHTML = '';
+  renderCarrito();
 
-    resumen.innerHTML = `
-      <p>Items: 0</p>
-      <p>Total: $0 COP</p>
-    `;
-  });
+  function renderCarritoPago() {
+    const itemsList = document.getElementById('Items');
+    const resumenPago = document.getElementById('Resumen');
+    if (!itemsList || !resumenPago) return;
 
-  const botonPago = document.getElementById('PayRedir');
-  botonPago.addEventListener('click', () => {
-    const totalItems = comprasList.children.length;
-    if (totalItems > 0) {
-      let totalPrice = 0;
-      comprasList.querySelectorAll('li').forEach(item => {
-        const priceText = item.querySelector('span').textContent.split('- $')[1].trim();
-        const price = parseInt(priceText.replace(',', ''));
-        totalPrice += price;
-      });
-      alert(`Procesando pago de $${totalPrice.toLocaleString()} COP por ${totalItems} artículos.`);
-      comprasList.innerHTML = '';
-      resumen.innerHTML = `
-        <p>Items: 0</p>
-        <p>Total: $0 COP</p>
-      `;
-    } else {
-      alert('El carrito está vacío.');
-    }
-  });
+    const cart = getCart();
+    itemsList.innerHTML = '';
 
-  fetchData();
-
-  Object.keys(botonesCategoria).forEach(categoria => {
-    const boton = botonesCategoria[categoria];
-    boton.addEventListener('click', () => {
-      mostrarCategoria(categoria);
+    cart.forEach(item => {
+      const li = document.createElement('li');
+      li.textContent = `${item.nombre} - $${item.precio}`;
+      itemsList.appendChild(li);
     });
-  });
+
+    const totalItems = cart.length;
+    const totalPrice = cart.reduce((total, item) => total + parseFloat(item.precio), 0);
+    resumenPago.innerHTML = `
+      <p>Items: ${totalItems}</p>
+      <p>Total: $${totalPrice.toLocaleString()} COP</p>
+    `;
+  }
+
+  if (document.getElementById('Menu')) {
+    const Menu = document.getElementById('Menu');
+    const Titulo = document.getElementById('titleMenu');
+    const BotonPagar = document.getElementById("PayRedir");
+    const botonVaciar = document.getElementById('Vaciar');
+
+    function mostrarCategoria(categoria) {
+      const itemsArray = Menu.querySelectorAll('li');
+      itemsArray.forEach(item => {
+        const tipoPlato = item.querySelector('p#Tipo').textContent.split(': ')[1];
+        if (categoria === 'Todo' || tipoPlato === categoria) {
+          item.style.display = 'grid';
+
+          if (categoria === 'Entrada') {
+            Titulo.innerHTML = "Entradas"
+          } else if (categoria === 'Rolls') {
+            Titulo.innerHTML = "Rolls"
+          } else if (categoria === 'Postre') {
+            Titulo.innerHTML = "Postres"
+          } else if (categoria === 'Bebida') {
+            Titulo.innerHTML = "Bebidas"
+          } else if (categoria === 'Todo') {
+            Titulo.innerHTML = "Menú Completo"
+          }
+
+        } else {
+          item.style.display = 'none';
+        }
+      });
+    }
+
+    async function fetchData() {
+      try {
+        const response = await fetch('https://script.googleusercontent.com/macros/echo?user_content_key=CKq-LQas5w4nUMnpY_-r0GUin-7rSoKPB7iBV_wXtrfbwojXs0-qOHR424skSoTiFA7eJEA2ER6ss48Xg6YhQibXYYv7Fu_4m5_BxDlH2jW0nuo2oDemN9CCS2h10ox_1xSncGQajx_ryfhECjZEnA6wXRRzyrfTIKmLYEVRoswXqyofKrLrma4N-JjG6IUfb06gUu96E11OfZziasEjNI-G1zoKx9HpX2tur1IPZjIGRoGQdMN6zNz9Jw9Md8uu&lib=MqXoQJ202MbeZzBd6_irkBTKZ9dnBgvUF');
+        
+        if (!response.ok) {
+          throw new Error(`HTTP error! status: ${response.status}`);
+        }
+
+        const data = await response.json();
+        renderMenu(data);
+
+      } catch (error) {
+        console.error('Error al realizar la solicitud:', error);
+      }
+    }
+
+    function renderMenu(menuData) {
+      const menuList = document.getElementById('Menu');
+      menuList.innerHTML = ''; 
+
+      const itemsArray = menuData.data;
+
+      itemsArray.forEach(item => {
+        const platos = document.createElement('li');
+        platos.classList.add('menu-item');
+
+        platos.innerHTML = `
+          <h3>${item.Nombre}</h3>
+          <img src="${item.Imagen}" alt="${item.Nombre}">
+          <p>${item.Descripcion}</p>
+          <p>Precio: $${item.Precio}</p>
+          <p id="Tipo">Tipo de plato: ${item.Tipo}</p>
+          <button class="agregarCarrito">Agregar al carrito</button>
+        `;
+        menuList.appendChild(platos);
+      });
+
+      asignarEventosCarrito();
+    }
+
+    function asignarEventosCarrito() {
+      const botonesAgregar = document.querySelectorAll('.agregarCarrito');
+      botonesAgregar.forEach((boton, index) => {
+        boton.addEventListener('click', function() {
+          const item = this.closest('li');
+          const nombre = item.querySelector('h3').textContent;
+          const precio = item.querySelector('p:nth-child(4)').textContent.split('$')[1];
+          agregarAlCarrito(nombre, parseFloat(precio));
+        });
+      });
+    }
+
+    if (botonVaciar) {
+      botonVaciar.addEventListener('click', () => {
+        if (confirm('¿Estás seguro de que deseas vaciar el carrito?')) {
+          vaciarCarrito();
+        }
+      });
+    }
+
+    if (BotonPagar) {
+      BotonPagar.addEventListener('click', () => {
+        const cart = getCart();
+        if (cart.length > 0) {
+          window.location.href = 'pago.html';
+        } else {
+          alert('El carrito está vacío.');
+        }
+      });
+    }
+
+    fetchData();
+
+    Object.keys(botonesCategoria).forEach(categoria => {
+      const boton = botonesCategoria[categoria];
+      boton.addEventListener('click', () => {
+        mostrarCategoria(categoria);
+      });
+    });
+
+  } else if (document.getElementById('paymentForm')) {
+    const paymentForm = document.getElementById('paymentForm');
+
+    renderCarritoPago();
+
+    paymentForm.addEventListener('submit', function(event) {
+      event.preventDefault(); 
+
+      const nombreCliente = document.getElementById('nombreCliente').value.trim();
+      const telefonoCliente = document.getElementById('telefonoCliente').value.trim();
+      const direccionCliente = document.getElementById('direccionCliente').value.trim();
+
+      if (!nombreCliente || !telefonoCliente || !direccionCliente) {
+        alert('Por favor, completa todos los campos.');
+        return;
+      }
+
+      const cart = getCart();
+      if (cart.length === 0) {
+        alert('El carrito está vacío.');
+        return;
+      }
+
+      const datosPago = {
+        cliente: {
+          nombre: nombreCliente,
+          telefono: telefonoCliente,
+          direccion: direccionCliente
+        },
+        pedido: cart
+      };
+
+      fetch('http://127.0.0.1:8000/api/pagar', { 
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json'
+        },
+        body: JSON.stringify(datosPago)
+      })
+      .then(response => {
+        if (!response.ok) {
+          throw new Error(`Error en el servidor: ${response.status}`);
+        }
+        return response.json();
+      })
+      .then(data => {
+        alert('Pago confirmado. ¡Gracias por tu compra!');
+        vaciarCarrito();
+        window.location.href = 'index.html'; 
+      })
+      .catch(error => {
+        console.error('Error al procesar el pago:', error);
+        alert('Hubo un error al procesar tu pago. Por favor, inténtalo de nuevo.');
+      });
+    });
+
+  }
 });
