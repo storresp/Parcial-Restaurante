@@ -2,8 +2,7 @@
 <html lang="en">
   <head>
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <meta name="viewport" content="width=device-width">
     <title>Menu</title>
     <link rel="stylesheet" href="./style.css">
     <link rel="icon" href="./favicon.ico" type="image/x-icon">
@@ -30,6 +29,10 @@
             Bebidas
         </button> 
 
+        <button id="Todo">
+          Todo
+        </button>
+
         <button id="BotonInicio">
           Inicio
         </button>
@@ -39,11 +42,233 @@
     </header>
 
     <main id="MenuMain">
-      <p>
-        Escoge que deseas
-      </p>
+      <h1 id="titleMenu"> Menú Completo </h1>
 
       <ul id="Menu">
+
+        <li class="PlatoFuerte">
+          <img src="./path_to_image1.jpg" alt="Filete de Pescado a la Plancha">
+          <h3>Filete de Pescado a la Plancha</h3>
+          <p>Un delicioso filete de pescado fresco, cocinado a la perfección en la plancha.</p>
+          <p class="price">$30,000 COP</p>
+          <button>Agregar al carrito</button>
+        </li>
+
+        <li class="PlatoFuerte">
+          <img src="path_to_image2.jpg" alt="Paella de Mariscos">
+          <h3>Paella de Mariscos</h3>
+          <p>Paella tradicional española con una rica variedad de mariscos frescos. Ideal para compartir.</p>
+          <p class="price">$75,000 COP</p>
+          <button>Agregar al carrito</button>
+        </li>
+
+        <li class="PlatoFuerte">
+          <img src="path_to_image3.jpg" alt="Camarones al Ajillo">
+          <h3>Camarones al Ajillo</h3>
+          <p>Camarones salteados con ajo y perejil, servidos con una guarnición de arroz.</p>
+          <p class="price">$33,000 COP</p>
+          <button>Agregar al carrito</button>
+        </li>
+
+        <li class="PlatoFuerte">
+          <img src="path_to_image4.jpg" alt="Pulpo a la Gallega">
+          <h3>Pulpo a la Gallega</h3>
+          <p>Pulpo tierno servido con papas y rociado con aceite de oliva y pimentón.</p>
+          <p class="price">$38,000 COP</p>
+          <button>Agregar al carrito</button>
+        </li>
+
+        <li class="PlatoFuerte">
+          <img src="path_to_image5.jpg" alt="Langosta Termidor">
+          <h3>Langosta Termidor</h3>
+          <p>Langosta gratinada con una salsa cremosa y servida con vegetales al vapor.</p>
+          <p class="price">$65,000 COP</p>
+          <button>Agregar al carrito</button>
+        </li>
+
+        <li class="PlatoFuerte">
+          <img src="path_to_image6.jpg" alt="Bacalao a la Vizcaína">
+          <h3>Bacalao a la Vizcaína</h3>
+          <p>Bacalao cocido a fuego lento en una deliciosa salsa de tomate con pimientos.</p>
+          <p class="price">$35,000 COP</p>
+          <button>Agregar al carrito</button>
+        </li>
+
+        <li class="PlatoFuerte">
+          <img src="path_to_image7.jpg" alt="Ceviche de Mariscos">
+          <h3>Ceviche de Mariscos</h3>
+          <p>Mariscos frescos marinados en jugo de limón con cebolla, cilantro y ají.</p>
+          <p class="price">$29,000 COP</p>
+          <button>Agregar al carrito</button>
+        </li>
+
+        <li class="PlatoFuerte">
+          <img src="path_to_image8.jpg" alt="Salmón a la Mantequilla">
+          <h3>Salmón a la Mantequilla</h3>
+          <p>Salmón fresco cocinado con mantequilla y hierbas, servido con espárragos.</p>
+          <p class="price">$38,000 COP</p>
+          <button>Agregar al carrito</button>
+        </li>
+
+        <li class="PlatoFuerte">
+          <img src="path_to_image9.jpg" alt="Arroz con Mariscos">
+          <h3>Arroz con Mariscos</h3>
+          <p>Arroz cocido a la perfección con una mezcla de mariscos y especias.</p>
+          <p class="price">$32,000 COP</p>
+          <button>Agregar al carrito</button>
+        </li>
+
+        <li class="PlatoFuerte">
+          <img src="path_to_image10.jpg" alt="Almejas al Vino Blanco">
+          <h3>Almejas al Vino Blanco</h3>
+          <p>Almejas frescas cocidas en una delicada salsa de vino blanco con ajo.</p>
+          <p class="price">$37,000 COP</p>
+          <button>Agregar al carrito</button>
+        </li>
+    
+        <li class="Postre">
+          <img src="path_to_image11.jpg" alt="Tarta de Limón">
+          <h3>Tarta de Limón</h3>
+          <p>Tarta con un sabor refrescante de limón, ideal para cerrar una buena comida.</p>
+          <p class="price">$12,000 COP</p>
+          <button>Agregar al carrito</button>
+        </li>
+
+        <li class="Postre">
+          <img src="path_to_image12.jpg" alt="Mousse de Maracuyá">
+          <h3>Mousse de Maracuyá</h3>
+          <p>Suave mousse hecha con maracuyá, perfecto balance entre dulce y ácido.</p>
+          <p class="price">$15,000 COP</p>
+          <button>Agregar al carrito</button>
+        </li>
+
+        <li class="Postre">
+          <img src="path_to_image13.jpg" alt="Helado de Coco">
+          <h3>Helado de Coco</h3>
+          <p>Refrescante helado hecho con leche de coco natural.</p>
+          <p class="price">$9,000 COP</p>
+          <button>Agregar al carrito</button>
+        </li>
+
+        <li class="Postre">
+          <img src="path_to_image14.jpg" alt="Tiramisú de Frutas">
+          <h3>Tiramisú de Frutas</h3>
+          <p>Delicioso tiramisú con una mezcla de frutas tropicales.</p>
+          <p class="price">$15,000 COP</p>
+          <button>Agregar al carrito</button>
+        </li>
+
+        <li class="Postre">
+          <img src="path_to_image15.jpg" alt="Flan de Caramelo">
+          <h3>Flan de Caramelo</h3>
+          <p>Clásico flan casero bañado en caramelo.</p>
+          <p class="price">$13,000 COP</p>
+          <button>Agregar al carrito</button>
+        </li>
+    
+        <li class="Entrada">
+          <img src="path_to_image16.jpg" alt="Ceviche de Pulpo">
+          <h3>Ceviche de Pulpo</h3>
+          <p>Pulpo fresco marinado en jugo de limón, acompañado de cebolla y cilantro.</p>
+          <p class="price">$28,000 COP</p>
+          <button>Agregar al carrito</button>
+        </li>
+
+        <li class="Entrada">
+          <img src="path_to_image17.jpg" alt="Mejillones al Vapor">
+          <h3>Mejillones al Vapor</h3>
+          <p>Mejillones cocidos al vapor con ajo y vino blanco.</p>
+          <p class="price">$20,000 COP</p>
+          <button>Agregar al carrito</button>
+        </li>
+
+        <li class="Entrada">
+          <img src="path_to_image18.jpg" alt="Sopa de Mariscos">
+          <h3>Sopa de Mariscos</h3>
+          <p>Sopa rica y espesa con una variedad de mariscos frescos.</p>
+          <p class="price">$22,000 COP</p>
+          <button>Agregar al carrito</button>
+        </li>
+
+        <li class="Entrada">
+          <img src="path_to_image19.jpg" alt="Ensalada de Langostinos">
+          <h3>Ensalada de Langostinos</h3>
+          <p>Langostinos frescos sobre una cama de verduras frescas.</p>
+          <p class="price">$26,000 COP</p>
+          <button>Agregar al carrito</button>
+        </li>
+
+        <li class="Entrada">
+          <img src="path_to_image20.jpg" alt="Tostadas de Atún">
+          <h3>Tostadas de Atún</h3>
+          <p>Tostadas crujientes con atún fresco y salsa de aguacate.</p>
+          <p class="price">$22,000 COP</p>
+          <button>Agregar al carrito</button>
+        </li>
+
+        <li class="Bebida">
+          <img src="path_to_image22.jpg" alt="Gaseosa">
+          <h3>Gaseosa</h3>
+          <p>Bebida refrescante, productos Coca - Cola.</p>
+          <p class="price">$8,000 COP</p>
+          <button>Agregar al carrito</button>
+        </li>
+
+        <li class="Bebida">
+          <img src="path_to_image22.jpg" alt="Limonada">
+          <h3>Limonada</h3>
+          <p>Limonada fresca. Natural, cerezada, de coco o hierbabuena.</p>
+          <p class="price">$7,000 COP</p>
+          <button>Agregar al carrito</button>
+      </li>
+      
+      <li class="Bebida">
+          <img src="path_to_image23.jpg" alt="Agua de Coco">
+          <h3>Agua de Coco</h3>
+          <p>Agua de coco natural y refrescante, ideal para rehidratarse.</p>
+          <p class="price">$9,000 COP</p>
+          <button>Agregar al carrito</button>
+      </li>
+      
+      <li class="Bebida">
+          <img src="path_to_image24.jpg" alt="Té Helado">
+          <h3>Té Helado</h3>
+          <p>Té negro helado con un toque de limón, servido con hielo.</p>
+          <p class="price">$8,000 COP</p>
+          <button>Agregar al carrito</button>
+      </li>
+      
+      <li class="Bebida">
+          <img src="path_to_image25.jpg" alt="Vino Blanco">
+          <h3>Vino Blanco</h3>
+          <p>Vino blanco fresco y afrutado, perfecto para acompañar platos ligeros. Bebida Alcoholica.</p>
+          <p class="price">$18,000 COP / Copa</p>
+          <button>Agregar al carrito</button>
+      </li>
+      
+      <li class="Bebida">
+          <img src="path_to_image26.jpg" alt="Cerveza Artesanal">
+          <h3>Cerveza Artesanal</h3>
+          <p>Cerveza artesanal de producción local, con un sabor único. Bebida Alcoholica.</p>
+          <p class="price">$15,000 COP</p>
+          <button>Agregar al carrito</button>
+      </li>
+      
+      <li class="Bebida">
+          <img src="path_to_image27.jpg" alt="Mojito">
+          <h3>Mojito</h3>
+          <p>Refrescante cóctel de menta, lima y ron. Bebida Alcoholica.</p>
+          <p class="price">$14,000 COP</p>
+          <button>Agregar al carrito</button>
+      </li>
+      
+      <li class="Bebida">
+          <img src="path_to_image28.jpg" alt="Sangría de Frutas">
+          <h3>Sangría de Frutas</h3>
+          <p>Sangría refrescante hecha con vino tinto y frutas tropicales. Bebida Alcoholica. </p>
+          <p class="price">$16,000 COP / Copa</p>
+          <button>Agregar al carrito</button>
+      </li>
 
       </ul>
     </main>
@@ -53,7 +278,7 @@
       <div id="Carrito">
         
         <ul id="Compras">
-
+          
         </ul>
 
         <button id="Vaciar">

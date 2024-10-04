@@ -1,21 +1,31 @@
+:root{
+    --color-accent-1: rgb(65, 88, 166);
+    --color-accent-2: rgb(23, 155, 174);
+    --color-main: rgb(241, 222, 198);
+    --color-main-2: rgb(255, 131, 67);
+}
+
 .container {
     display: grid;
-    grid-template-columns: repeat(2, 1fr) 0.7fr;
+    grid-template-columns: 1fr 0.4fr;
     grid-template-rows: 0.6fr repeat(3, 1fr) 0.3fr;
-    grid-column-gap: 0px;
-    grid-row-gap: 0px;
-    height: 100vh;
     margin: 0;
+    height: 100vh;
+    width: auto;
+    background-color: var(--color-accent-2);
 }
 
 header {
-    grid-area: 1 / 1 / 2 / 4;
+    grid-area: 1 / 1 / 2 / 3;
     display: grid;
+    grid-template-columns: repeat(7, 1fr);
+    grid-template-rows: 1fr;
+    background-color: var(--color-main-2);
 }
 
 nav {
-    display: inline-grid;
-    grid-area: 1 / 1 / 1 / 1;
+    display: grid;
+    grid-area: 1 / 2 / 1 / 8;
     grid-template-columns: repeat(6, 1fr);
     grid-template-rows: 1fr;
 
@@ -36,22 +46,77 @@ nav {
     }
 
     #BotonInicio {
-        grid-column: 5 / 6;
+        grid-column: 6 / 7;
+    }
+
+    button {
+        margin: 2rem;
+        border-radius: 1rem;
     }
 }
 
 footer {
-    grid-area: 5 / 1 / 6 / 4;
+    grid-area: 5 / 1 / 6 / 3;
 }
 
 #Introduccion {
-    grid-area: 2 / 1 / 5 / 4;
-}
-
-#MenuMain{
     grid-area: 2 / 1 / 5 / 3;
 }
 
-#menuCarrito{
-    grid-area: 2 / 3 / 5 / 4;
+main {
+    #titleMenu {
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        grid-area: header;
+    }
 }
+
+#MenuMain{
+    grid-area: 2 / 1 / 5 / 2;
+    margin: 1.5rem;
+    border-radius: 1rem;
+    background-color: var(--color-main);
+    overflow: auto;
+    font-size: 0.8rem;
+}
+
+#Menu {
+    display: flex;
+    flex-wrap: wrap;
+    margin: auto;
+    font-size: 0.8rem;
+    list-style-type: none;
+    margin: 2rem;
+    padding: 0;
+    place-content: center;
+    -ms-overflow-style: none;  
+    scrollbar-width: none;
+      
+
+    li {
+        border-radius: 2rem;
+        margin: 0.5rem;
+        display: grid;
+        grid-template-rows: auto;
+        place-self: center;
+        place-items: center;
+        background-color: var(--color-main-2);
+        padding: 0.5rem;
+        width: 40%;
+        height: 15rem;
+    }
+}
+
+#menuCarrito{
+    grid-area: 2 / 2 / 5 / 3;
+    margin: 1.5rem;
+    border-radius: 1rem;
+    background-color: var(--color-main);
+    font-size: 0.8rem;
+}
+
+#MenuMain::-webkit-scrollbar {
+    display: none;
+}
+
