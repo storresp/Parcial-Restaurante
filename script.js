@@ -159,7 +159,6 @@ document.addEventListener('DOMContentLoaded', function () {
             {
               mode: 'no-cors',
               headers: {
-                'Access-Control-Allow-Origin': '*',
                 'Content-Type': 'application/json'
               }
             }
