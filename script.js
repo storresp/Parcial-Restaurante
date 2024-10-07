@@ -160,7 +160,7 @@ document.addEventListener('DOMContentLoaded', function () {
               method: 'GET',
               mode: 'no-cors',
               headers: {
-                'Access-Control-Allow-Origin': 'no-cors',
+                'Access-Control-Allow-Origin': '*',
                 'Content-Type': 'application/json'
               }
             }
@@ -288,7 +288,7 @@ document.addEventListener('DOMContentLoaded', function () {
         method: 'POST',
         mode: 'no-cors',
         headers: {
-          'Access-Control-Allow-Origin': 'no-cors',
+          'Access-Control-Allow-Origin': '*',
           'Content-Type': 'application/json'
         },
         body: JSON.stringify(datosPago)
