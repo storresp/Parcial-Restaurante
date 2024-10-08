@@ -155,7 +155,7 @@ document.addEventListener('DOMContentLoaded', function () {
 
     async function fetchData() {
       try {
-        const response = await fetch('https://script.google.com/macros/s/AKfycbyF0ueDAk6k8WxPVckWal8cNLJZ8uaTVeBDjTIzRL9fPLdOMZMfR0NkV04vXZQYMa3O0Q/exec');
+        const response = await fetch('https://script.google.com/macros/s/AKfycbwZ9JIrW-FLEe43WL84XRcbIb0blzf9y0sy2L8kLvK73OXYJqMBRFUDybr_qF_YMy4_UA/exec');
         
         if (!response.ok) {
           throw new Error(`HTTP error! status: ${response.status}`);
@@ -277,7 +277,7 @@ document.addEventListener('DOMContentLoaded', function () {
       };
       
       try {
-        const response = await fetch('https://script.google.com/macros/s/AKfycbyF0ueDAk6k8WxPVckWal8cNLJZ8uaTVeBDjTIzRL9fPLdOMZMfR0NkV04vXZQYMa3O0Q/exec', {
+        const response = await fetch('https://script.google.com/macros/s/AKfycbwZ9JIrW-FLEe43WL84XRcbIb0blzf9y0sy2L8kLvK73OXYJqMBRFUDybr_qF_YMy4_UA/exec', {
           method: 'POST',
           mode: 'cors',
           headers: {
