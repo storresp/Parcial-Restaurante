@@ -280,6 +280,9 @@ document.addEventListener('DOMContentLoaded', function () {
         const response = await fetch('https://script.google.com/macros/s/AKfycbx0_pKg01yBxyHz_2PdNEU7JkXC0wqB3BVkuuW2-kkzxUkKUwO9jRKjyeNH1XX1RA5YyA/exec', {
           method: 'POST',
           mode: 'no-cors',
+          headers: {
+            'Content-Type': 'application/json'
+          },
           body: JSON.stringify(datosPago)
         });
         
