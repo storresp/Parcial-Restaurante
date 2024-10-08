@@ -181,8 +181,8 @@ document.addEventListener('DOMContentLoaded', function () {
         platos.classList.add('menu-item');
 
         platos.innerHTML = `
-          <h3>${item.Nombre}</h3>
           <img src="${item.Imagen}" alt="${item.Nombre}">
+          <h3>${item.Nombre}</h3>
           <p>${item.Descripcion}</p>
           <p>Precio: $${item.Precio}</p>
           <p id="Tipo">Tipo de plato: ${item.Tipo}</p>
