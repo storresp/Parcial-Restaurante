@@ -279,12 +279,13 @@ document.addEventListener('DOMContentLoaded', function () {
       try {
         const response = await fetch('https://script.google.com/macros/s/AKfycbx0_pKg01yBxyHz_2PdNEU7JkXC0wqB3BVkuuW2-kkzxUkKUwO9jRKjyeNH1XX1RA5YyA/exec', {
           method: 'POST',
+          mode: 'no-cors',
           headers: {
-            'Access-Control-Allow-Origin': '*',
             'Content-Type': 'application/json'
           },
           body: JSON.stringify(datosPago)
         });
+        
 
         if (!response.ok) {
           throw new Error(`Error en la solicitud: ${response.statusText}`);
