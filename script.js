@@ -279,7 +279,7 @@ document.addEventListener('DOMContentLoaded', function () {
       try {
         const response = await fetch('https://script.google.com/macros/s/AKfycbyF0ueDAk6k8WxPVckWal8cNLJZ8uaTVeBDjTIzRL9fPLdOMZMfR0NkV04vXZQYMa3O0Q/exec', {
           method: 'POST',
-          mode: 'no-cors',
+          mode: 'cors',
           headers: {
             'Content-Type': 'application/json'
           },
