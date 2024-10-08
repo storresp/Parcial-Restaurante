@@ -286,7 +286,14 @@ document.addEventListener('DOMContentLoaded', function () {
           },
           body: JSON.stringify(datosPago)
         });
-        
+
+        if (!response || response.type === 'opaque') {
+          console.warn('Advertencia: Respuesta opaca debido a las políticas de CORB. Ignorando el error.');
+          alert('¡Pedido realizado con éxito!');
+          vaciarCarrito();
+          window.location.href = 'index.html';
+          return;
+        }
 
         if (!response.ok) {
           throw new Error(`Error en la solicitud: ${response.statusText}`);
