@@ -181,7 +181,9 @@ document.addEventListener('DOMContentLoaded', function () {
         platos.classList.add('menu-item');
 
         platos.innerHTML = `
-          <img src="${item.Imagen}" alt="${item.Nombre}">
+          <div>
+            <img src="${item.Imagen}" alt="${item.Nombre}">
+          </div>
           <h3>${item.Nombre}</h3>
           <p>${item.Descripcion}</p>
           <p>Precio: $${item.Precio}</p>
@@ -242,12 +244,12 @@ document.addEventListener('DOMContentLoaded', function () {
       });
     });
 
-  } else if (document.getElementById('paymentForm')) {
+  } if (document.getElementById('paymentForm')) {
     const paymentForm = document.getElementById('paymentForm');
 
     renderCarritoPago();
 
-    paymentForm.addEventListener('submit', function(event) {
+    paymentForm.addEventListener('submit', async function(event) {
       event.preventDefault(); 
 
       const nombreCliente = document.getElementById('nombreCliente').value.trim();
@@ -274,33 +276,34 @@ document.addEventListener('DOMContentLoaded', function () {
         pedido: cart
       };
       
-      fetch('https://script.googleusercontent.com/macros/echo?user_content_key=CKq-LQas5w4nUMnpY_-r0GUin-7rSoKPB7iBV_wXtrfbwojXs0-qOHR424skSoTiFA7eJEA2ER6ss48Xg6YhQibXYYv7Fu_4m5_BxDlH2jW0nuo2oDemN9CCS2h10ox_1xSncGQajx_ryfhECjZEnA6wXRRzyrfTIKmLYEVRoswXqyofKrLrma4N-JjG6IUfb06gUu96E11OfZziasEjNI-G1zoKx9HpX2tur1IPZjIGRoGQdMN6zNz9Jw9Md8uu&lib=MqXoQJ202MbeZzBd6_irkBTKZ9dnBgvUF', { 
-        method: 'POST',
-        headers: {
-          'Access-Control-Allow-Origin': '*',
-          'Content-Type': 'application/json'
-        },
-        body: JSON.stringify(datosPago)
-      })
-      .then(response => {
+      try {
+        const response = await fetch('https://script.google.com/macros/s/AKfycbx0_pKg01yBxyHz_2PdNEU7JkXC0wqB3BVkuuW2-kkzxUkKUwO9jRKjyeNH1XX1RA5YyA/exec', {
+          method: 'POST',
+          headers: {
+            'Access-Control-Allow-Origin': '*',
+            'Content-Type': 'application/json'
+          },
+          body: JSON.stringify(datosPago)
+        });
+
         if (!response.ok) {
-          throw new Error(`Error en el servidor: ${response.status}`);
+          throw new Error(`Error en la solicitud: ${response.statusText}`);
         }
-        return response.json();
-      })
-      .then(data => {
-        if (data.status === 'success') {
-          alert('Pago confirmado. ¡Gracias por tu compra!');
+
+        const result = await response.json();
+
+        if (result.result === 'success') {
+          alert('¡Pedido realizado con éxito!');
           vaciarCarrito();
-          window.location.href = 'index.html'; 
+
+          window.location.href = 'index.html';
         } else {
           throw new Error('Error al procesar el pedido.');
         }
-      })
-      .catch(error => {
-        console.error('Error al procesar el pago:', error);
-        alert('Hubo un error al procesar tu pago. Por favor, inténtalo de nuevo.');
-      });
+      } catch (error) {
+        console.error('Error al enviar el pedido:', error);
+        alert('Hubo un problema al procesar tu pedido. Por favor, inténtalo de nuevo.');
+      }
     });
   }
 });
