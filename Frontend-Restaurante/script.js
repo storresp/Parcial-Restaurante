@@ -155,7 +155,7 @@ document.addEventListener('DOMContentLoaded', function () {
 
     async function fetchData() {
       try {
-        const response = await fetch('https://script.google.com/macros/s/AKfycbyF0ueDAk6k8WxPVckWal8cNLJZ8uaTVeBDjTIzRL9fPLdOMZMfR0NkV04vXZQYMa3O0Q/exec');
+        const response = await fetch('https://script.google.com/macros/s/AKfycbwZ9JIrW-FLEe43WL84XRcbIb0blzf9y0sy2L8kLvK73OXYJqMBRFUDybr_qF_YMy4_UA/exec');
         
         if (!response.ok) {
           throw new Error(`HTTP error! status: ${response.status}`);
@@ -277,15 +277,23 @@ document.addEventListener('DOMContentLoaded', function () {
       };
       
       try {
-        const response = await fetch('https://script.google.com/macros/s/AKfycbyF0ueDAk6k8WxPVckWal8cNLJZ8uaTVeBDjTIzRL9fPLdOMZMfR0NkV04vXZQYMa3O0Q/exec', {
+        const response = await fetch('https://script.google.com/macros/s/AKfycbwZ9JIrW-FLEe43WL84XRcbIb0blzf9y0sy2L8kLvK73OXYJqMBRFUDybr_qF_YMy4_UA/exec', {
           method: 'POST',
           mode: 'no-cors',
           headers: {
-            'Content-Type': 'application/json'
+            'Content-Type': 'application/json',
+            'Access-Control-Allow-Origin' : '*'
           },
           body: JSON.stringify(datosPago)
         });
-        
+
+        if (!response || response.type === 'opaque') {
+          console.warn('Advertencia: Respuesta opaca debido a las políticas de CORB. Ignorando el error.');
+          alert('¡Pedido realizado con éxito!');
+          vaciarCarrito();
+          window.location.href = 'index.html';
+          return;
+        }
 
         if (!response.ok) {
           throw new Error(`Error en la solicitud: ${response.statusText}`);
